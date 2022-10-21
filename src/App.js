@@ -13,8 +13,8 @@ export default function App () {
           <Route path="/" element={<Home />} />
           <Route path="/products/types" element={<Home />} />
           <Route path="/products/types/:id" element={<ProductTypeDetails />} />
+          <Route path="/products/types/:id/edit" element={ <ProductTypeEdit />} />
           <Route path="/products/types/new" element={ <ProductTypeEdit />} />
-          <Route path="/products/types/edit" element={ <ProductTypeEdit />} />
         </Routes>
       </Router>
     </Provider> 

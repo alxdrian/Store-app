@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ProductType from './ProductType';
+import { Link } from "react-router-dom";
+import ProductTypeCard from './ProductTypeCard';
 import { getAll } from './productTypeSlice';
 
 export default function ProductTypeList () {
@@ -10,7 +11,7 @@ export default function ProductTypeList () {
 
   useEffect(()=> {
     dispatch(getAll())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disabfetch le-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -24,12 +25,15 @@ export default function ProductTypeList () {
       {productTypes.status.loading && <div>loading ...</div>}
       {productTypes.list.length > 0 && 
         productTypes.list.map(productType =>
-          <ProductType 
+          <Link 
+            to={`/products/types/${productType.id}`}
             key={`productType-${productType.id}`}
-            name={productType.name}
-            description={productType.description}
-            imageUrl={productType.imageUrl}
-          />  
+          >
+            <ProductTypeCard
+              name={productType.name}
+              imageUrl={productType.imageUrl}
+            />  
+          </Link>
         )
       }
     </div>
