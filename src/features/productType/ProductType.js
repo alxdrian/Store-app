@@ -3,7 +3,7 @@ export default function ProductType ({name, description, imageUrl}) {
     <div>
       <p>{name}</p>
       <p>{description}</p>
-      <img src={imageUrl} />
+      <img src={imageUrl}  alt={name} />
     </div>
   )
 }

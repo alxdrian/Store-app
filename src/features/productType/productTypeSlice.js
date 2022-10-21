@@ -31,6 +31,7 @@ const productTypeSlice = createSlice({
         state.productTypes.status = { succeded: true }
       })
       .addCase(getAll.rejected, (state, action) => {
+        console.log(action.error)
         state.productTypes.status = { error: action.error }
       })
   }
