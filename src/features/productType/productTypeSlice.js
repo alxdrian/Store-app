@@ -4,7 +4,8 @@ import { getAllProductTypes } from '../../api/productTypeApi';
 const initialState = {
   productTypes: {
     list: [],
-    status: { idle: true }
+    status: { idle: true },
+    selected: {}
   }
 }
 
