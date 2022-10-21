@@ -6,12 +6,11 @@ import { getAll } from './productTypeSlice';
 
 export default function ProductTypeList () {
   const dispatch = useDispatch()
-  const store = useSelector(state => state.productType)
-  const productTypes = store.productTypes
+  const productTypes = useSelector(state => state.productType)
 
   useEffect(()=> {
     dispatch(getAll())
-    // eslint-disabfetch le-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

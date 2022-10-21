@@ -1,12 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllProductTypes, getProductTypeById } from '../../api/productTypeApi';
 
+const initialForm = {
+  mode: { creation: true },
+  fields: {
+    name: 'nombre',
+    description: 'descripción',
+    imageUrl: 'image-url'
+  },
+}
+
 const initialState = {
-  productTypes: {
-    list: [],
-    status: { idle: true },
-    selected: {}
-  }
+  list: [],
+  status: { idle: true },
+  selected: {},
+  form: initialForm
 }
 
 export const getAll = createAsyncThunk(
@@ -28,32 +36,48 @@ export const getById = createAsyncThunk(
 const productTypeSlice = createSlice({
   name: 'productType',
   initialState,
-  reducers: {},
+  reducers: {
+    setFormField: (state, action) => {
+      state.form.fields[action.payload.field] = action.payload.value
+    },
+    setEditionMode: (state) => {
+      state.form.mode = { edition: true }
+    },
+    setCreationMode: (state) => {
+      state.form.mode = { creation: true }
+    },
+    setResetForm: (state) => {
+      state.form = initialForm
+    },
+  },
   extraReducers: (builder) => {
     builder
       // status fetch all productTypes
       .addCase(getAll.pending, (state) => {
-        state.productTypes.status = { loading: true }
+        state.status = { loading: true }
       })
       .addCase(getAll.fulfilled, (state, action) => {
-        state.productTypes.list = action.payload
-        state.productTypes.status = { succeded: true }
+        state.list = action.payload
+        state.status = { succeded: true }
       })
       .addCase(getAll.rejected, (state, action) => {
-        state.productTypes.status = { error: action.error }
+        state.status = { error: action.error }
       })
       // status fetch productType by id
       .addCase(getById.pending, (state) => {
-        state.productTypes.status = { loading: true }
+        state.status = { loading: true }
       })
       .addCase(getById.fulfilled, (state, action) => {
-        state.productTypes.selected = action.payload
-        state.productTypes.status = { succeded: true }
+        state.selected = action.payload
+        state.form.fields = action.payload
+        state.status = { succeded: true }
       })
       .addCase(getById.rejected, (state, action) => {
-        state.productTypes.status = { error: action.error }
+        state.status = { error: action.error }
       })
   }
 })
+
+export const { setFormField, setEditionMode, setCreationMode, setResetForm } = productTypeSlice.actions
 
 export default productTypeSlice.reducer
