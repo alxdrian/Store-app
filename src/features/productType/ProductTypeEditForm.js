@@ -30,12 +30,12 @@ export default function ProductTypeEditForm ({mode}) {
   function onSubmitForm (e) {
     e.preventDefault()
     if (mode === 'edit') {
-      dispatch(editProductType(form))
+      dispatch(editProductType(fields))
       navigate(`/products/types/${id}`)
     }
     if (mode === 'create') {
-      dispatch(addProductType(form))
-      navigate(`/products/types`)
+      dispatch(addProductType(fields))
+      navigate(`/`)
     }
   }
 

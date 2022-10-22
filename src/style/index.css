@@ -10,3 +10,5 @@
 @import "./components/form.css";
 @import "./components/button.css";
 @import "./components/container.css";
+@import "./components/error.css";
+@import "./components/loader.css";

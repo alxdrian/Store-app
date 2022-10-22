@@ -1,0 +1,7 @@
+.error {
+  position: absolute;
+  top: 10vh;
+  background-color: var(--secondary);
+  padding: 20px;
+  border-radius: 10px;
+}

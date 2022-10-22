@@ -19,7 +19,7 @@ export default function ProductType () {
 
   function onDelete (e) {
     dispatch(deleteProductType(id))
-    navigate('/products/type')
+    navigate('/')
   }
 
   return (

@@ -7,13 +7,6 @@ export default function ProductTypeList () {
 
   return (
     <div className='card-list'>
-      {productTypes.status.error &&
-        <div>
-          <p>Code: {productTypes.status.error.code}</p>
-          <p>Message: {productTypes.status.error.message}</p>
-        </div>
-      }
-      {productTypes.status.loading && <div>loading ...</div>}
       {productTypes.list.length > 0 && 
         productTypes.list.map(productType =>
           <Link 
