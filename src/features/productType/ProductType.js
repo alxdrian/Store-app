@@ -23,22 +23,25 @@ export default function ProductType () {
   }
 
   return (
-    <div>
-      <div>
-        <p>{productType.name}</p>
-        <p>{productType.description}</p>
-        <img src={productType.imageUrl} alt={productType.name} />
+    <div className='product-type-container'>
+      <img className='product-type-image' src={productType.imageUrl} alt={productType.name} />
+      <div className='product-type-content'>
+        <h1 className='heading--xxl'>{productType.name}</h1>
+        <div className='card'>
+          <p className='content--xxl'>{productType.description}</p>
+        </div>
+        <div className='buttons-container'>
+          <Link to={`${location.pathname}/edit`}>
+            <TextButton type={'button'} text={'Editar'}></TextButton>
+          </Link>
+          <TextButton 
+            type={'button'} 
+            text={'Eliminar'}
+            onClick={e => onDelete()}
+          >
+          </TextButton>
+        </div>
       </div>
-      
-      <Link to={`${location.pathname}/edit`}>
-        <TextButton type={'button'} text={'EDITAR'}></TextButton>
-      </Link>
-      <TextButton 
-        type={'button'} 
-        text={'ELIMINAR'}
-        onClick={e => onDelete()}
-      >
-      </TextButton>
     </div>
   )
 }

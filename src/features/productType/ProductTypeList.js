@@ -6,7 +6,7 @@ export default function ProductTypeList () {
   const productTypes = useSelector(state => state.productType)
 
   return (
-    <div>
+    <div className='card-list'>
       {productTypes.status.error &&
         <div>
           <p>Code: {productTypes.status.error.code}</p>

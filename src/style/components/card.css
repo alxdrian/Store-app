@@ -1,14 +1,18 @@
+/* CARD */
+
 .card {
   display: flex;
   flex-direction: column;
   background-color: var(--surface);
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 4px 0 rgba(88, 88, 88, 0.5), 0 25px 50px 0 rgba(196, 196, 196, 0.1);
+  padding: 20px;
 }
 
 .card-lg {
-  height: 250px;
-  width: 250px;
+  height: 300px;
+  width: 300px;
+  padding: 25px;
 }
 
 .card-md {
@@ -31,4 +35,13 @@
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+}
+
+/* CARD LIST */
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
 }
