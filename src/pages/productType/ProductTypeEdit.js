@@ -1,9 +1,9 @@
 import ProductTypeForm from "../../features/productType/ProductTypeForm";
 
-export default function ProductTypeEdit () {
+export default function ProductTypeEdit ({mode}) {
   return (
     <div>
-      <ProductTypeForm />
+      <ProductTypeForm mode={mode}/>
     </div>
   )
 }

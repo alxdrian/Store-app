@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { editProductType, getById, setFormField } from "./productTypeSlice"
+import { addProductType, editProductType, getById, setFormField, setResetForm } from "./productTypeSlice"
 import FormControl from "../../common/sharedComponents/form/FormControl";
 import { TextButton } from '../../common/sharedComponents/page/Button';
 
-export default function ProductTypeForm () {
+export default function ProductTypeForm ({mode}) {
   const dispatch = useDispatch()
   const store = useSelector(state => state.productType)
   const form = store.form.fields
@@ -16,7 +16,8 @@ export default function ProductTypeForm () {
   const [validForm, setValidForm] = useState(true)
 
   useEffect(()=> {
-    dispatch(getById(id))
+    if (mode === 'edit') dispatch(getById(id))
+    if (mode === 'create') dispatch(setResetForm())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -27,8 +28,14 @@ export default function ProductTypeForm () {
 
   function onSubmitForm (e) {
     e.preventDefault()
-    dispatch(editProductType(form))
-    navigate(`/products/types/${id}`)
+    if (mode === 'edit') {
+      dispatch(editProductType(form))
+      navigate(`/products/types/${id}`)
+    }
+    if (mode === 'create') {
+      dispatch(addProductType(form))
+      navigate(`/products/types`)
+    }
   }
 
   return (
