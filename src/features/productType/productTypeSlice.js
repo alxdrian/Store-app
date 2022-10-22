@@ -12,8 +12,10 @@ const initialForm = {
 
 const initialState = {
   list: [],
+  res: {},
   status: { idle: true },
   selected: {},
+  search: '',
   form: initialForm
 }
 
@@ -21,7 +23,7 @@ export const getAll = createAsyncThunk(
   'productType/getAllProductTypes',
   async(filters) => {
     const response = await getAllProductTypes(filters)
-    return response.data.data
+    return response.data
   }
 )
 
@@ -74,6 +76,9 @@ const productTypeSlice = createSlice({
     setResetForm: (state) => {
       state.form = initialForm
     },
+    setSearch: (state, action) => {
+      state.search = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -82,7 +87,9 @@ const productTypeSlice = createSlice({
         state.status = { loading: true }
       })
       .addCase(getAll.fulfilled, (state, action) => {
-        state.list = action.payload
+        console.log(action.payload)
+        state.list = action.payload.data
+        state.res = action.payload
         state.status = { succeded: true }
       })
       .addCase(getAll.rejected, (state, action) => {
@@ -133,6 +140,6 @@ const productTypeSlice = createSlice({
   }
 })
 
-export const { setFormField, setEditionMode, setCreationMode, setResetForm } = productTypeSlice.actions
+export const { setFormField, setEditionMode, setCreationMode, setResetForm, setSearch } = productTypeSlice.actions
 
 export default productTypeSlice.reducer

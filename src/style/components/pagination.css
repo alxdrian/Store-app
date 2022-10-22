@@ -1,0 +1,32 @@
+.pagination {
+  display: flex;
+  gap: 10px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.page:hover {
+  background-color: var(--primary);
+  color: var(--text-on-primary);
+}
+
+.page-divisor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  color: var(--primary);
+  font-size: 26px;
+  font-weight: 600;
+}
