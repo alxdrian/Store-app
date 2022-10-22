@@ -15,7 +15,9 @@ export default function ProductTypeSearchForm () {
   const search = useSelector(state => state.productType).search
   
   useEffect(()=> {
+    // almacena el nombre a buscar en el store
     dispatch(setSearch(filters.name || ''))
+    // obtiene la data de acuerdo a los parámetros de la url actual
     dispatch(getAll(query))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

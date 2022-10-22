@@ -1,3 +1,5 @@
+// Obtiene un array de filtros y retorna un objeto con cada filtro - valor
+
 export function parseFilters (filters) {
   let result = {}
   filters.split('&').forEach(element => {
