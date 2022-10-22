@@ -8,11 +8,12 @@ import { TextButton } from '../../common/sharedComponents/page/Button';
 export default function ProductTypeEditForm ({mode}) {
   const dispatch = useDispatch()
   const store = useSelector(state => state.productType)
-  const form = store.form.fields
+  const fields = store.form.fields
   const location = useLocation()
   const navigate = useNavigate()
   const id = location.pathname.split('/')[3]
   const previewImg = useRef()
+  const form = useRef()
   const [validForm, setValidForm] = useState(false)
 
   useEffect(()=> {
@@ -23,7 +24,7 @@ export default function ProductTypeEditForm ({mode}) {
 
   function onChangeField (e) {
     dispatch(setFormField({field: e.target.name, value: e.target.value}))
-    setValidForm(e.target.validity.valid)
+    setValidForm(form.current.checkValidity())
   }
 
   function onSubmitForm (e) {
@@ -39,7 +40,7 @@ export default function ProductTypeEditForm ({mode}) {
   }
 
   return (
-    <form onSubmit={(e) => onSubmitForm(e)} className='product-type-container'>
+    <form onSubmit={(e) => onSubmitForm(e)} className='product-type-container' ref={form}>
       <div className='card product-type-edit-form'>
         {mode === 'create' && <h2 className='heading--xl'>Crear nuevo producto</h2>}
         {mode === 'edit' && <h2 className='heading--xl'>Editar producto</h2>}
@@ -47,7 +48,7 @@ export default function ProductTypeEditForm ({mode}) {
           name={'name'}
           type={'text'}
           placeholder={'Nombre'}
-          value={form.name}
+          value={fields.name}
           onChange={(e) => onChangeField(e)}
           required={true}
         >
@@ -57,7 +58,7 @@ export default function ProductTypeEditForm ({mode}) {
           name={'description'}
           type={'textarea'}
           placeholder={'Descripción'}
-          value={form.description}
+          value={fields.description}
           onChange={(e) => onChangeField(e)}
           required={true}
         >
@@ -67,7 +68,7 @@ export default function ProductTypeEditForm ({mode}) {
           name={'imageUrl'}
           type={'url'}
           placeholder={'https://...'}
-          value={form.imageUrl}
+          value={fields.imageUrl}
           onChange={(e) => onChangeField(e)}
         >
           <p className="content-lg">Url de imagen</p>
@@ -76,7 +77,7 @@ export default function ProductTypeEditForm ({mode}) {
       </div>
       
       <img 
-        src={form.imageUrl} 
+        src={fields.imageUrl} 
         alt='vista previa de url de imagen'
         ref={previewImg}
         onError={(e) => previewImg.current.src = 'https://www.quicideportes.com/assets/images/custom/no-image.png' }
