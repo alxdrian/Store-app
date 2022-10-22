@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { getById, setFormField } from "./productTypeSlice"
+import { editProductType, getById, setFormField } from "./productTypeSlice"
 import FormControl from "../../common/sharedComponents/form/FormControl";
 import { TextButton } from '../../common/sharedComponents/page/Button';
 
@@ -9,7 +9,8 @@ export default function ProductTypeForm () {
   const dispatch = useDispatch()
   const store = useSelector(state => state.productType)
   const form = store.form.fields
-  const location = useLocation()  
+  const location = useLocation()
+  const navigate = useNavigate()
   const id = location.pathname.split('/')[3]
   const previewImg = useRef()
   const [validForm, setValidForm] = useState(true)
@@ -20,13 +21,18 @@ export default function ProductTypeForm () {
   }, [])
 
   function onChangeField (e) {
-    e.preventDefault()
     dispatch(setFormField({field: e.target.name, value: e.target.value}))
     setValidForm(e.target.validity.valid)
   }
 
+  function onSubmitForm (e) {
+    e.preventDefault()
+    dispatch(editProductType(form))
+    navigate(`/products/types/${id}`)
+  }
+
   return (
-    <form>
+    <form onSubmit={(e) => onSubmitForm(e)}>
       <FormControl
         name={'name'}
         type={'text'}

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllProductTypes, getProductTypeById } from '../../api/productTypeApi';
+import { editProductTypeById, getAllProductTypes, getProductTypeById } from '../../api/productTypeApi';
 
 const initialForm = {
   mode: { creation: true },
@@ -29,6 +29,14 @@ export const getById = createAsyncThunk(
   'productType/getProductTypeById',
   async(id) => {
     const response = await getProductTypeById(id)
+    return response.data.data
+  }
+)
+
+export const editProductType = createAsyncThunk(
+  'productType/editProductType',
+  async(productType) => {
+    const response = await editProductTypeById(productType.id, productType)
     return response.data.data
   }
 )
@@ -73,6 +81,16 @@ const productTypeSlice = createSlice({
         state.status = { succeded: true }
       })
       .addCase(getById.rejected, (state, action) => {
+        state.status = { error: action.error }
+      })
+      // status fetch edit productType
+      .addCase(editProductType.pending, (state) => {
+        state.status = { loading: true }
+      })
+      .addCase(editProductType.fulfilled, (state) => {
+        state.status = { idle: true }
+      })
+      .addCase(editProductType.rejected, (state, action) => {
         state.status = { error: action.error }
       })
   }
