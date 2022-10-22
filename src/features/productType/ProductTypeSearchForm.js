@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { parseFilters } from '../../common/helpers/utils';
 import FormControl from "../../common/sharedComponents/form/FormControl";
+import Banner from '../../common/sharedComponents/page/Banner';
 import { TextButton } from '../../common/sharedComponents/page/Button';
 import { getAll } from './productTypeSlice';
 
@@ -25,23 +26,32 @@ export default function ProductTypeSearchForm () {
   }
 
   return (
-    <div>
-      <FormControl
-        type={'text'}
-        name={'search'}
-        id={'search'}
-        placeholder={'Tu tipo de producto ...'}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      >
-        <p className="content-lg">Buscar</p>
-      </FormControl>
-      <TextButton
-        type={'button'}
-        onClick={onSearch}
-        text={'BUSCAR'}
-      >
-      </TextButton>
-    </div>
+    <Banner>
+      <div className='search-form'>
+        <FormControl
+          type={'text'}
+          name={'search'}
+          id={'search'}
+          placeholder={'Tu tipo de producto ...'}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        >
+          <p className="heading--xxl mb-10">Los mejores productos para ti</p>
+          <p className='content--lg'>Encuéntralo a un click de distancia</p>
+        </FormControl>
+        <TextButton
+          type={'button'}
+          onClick={onSearch}
+          text={'Buscar'}
+        />
+      </div>
+      <Link to={'/products/types/new'}>
+        <TextButton
+          type={'button'}
+          text={'Crear nuevo tipo de producto'}
+        />
+      </Link>
+      
+    </Banner>
   )
 }

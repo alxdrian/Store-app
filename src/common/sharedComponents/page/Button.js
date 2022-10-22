@@ -7,7 +7,7 @@ export function TextButton (props) {
       onClick={props.onClick}
     >
       {props.children}
-      <p>{props.text}</p>
+      <p className="content--sm">{props.text}</p>
     </button>
   )
 }

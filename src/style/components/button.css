@@ -1,0 +1,14 @@
+button {
+  display: flex;
+  gap: 5px;
+  padding: 10px 20px;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--terciary);
+  color: var(--text-on-secondary);
+  cursor: pointer;
+  font-weight: 600;
+}

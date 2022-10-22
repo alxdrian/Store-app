@@ -1,14 +1,13 @@
 :root {
-  --primary: #53a9bb;
-  --secondary: #9bc7cd;
-  --terciary: #b4c35f;
-  --background: rgba(216, 237, 235, 0.908);
+  --primary: #53c3da;
+  --secondary: #ffe4bd;
+  --terciary: #deed6b;
+  --background: rgb(244, 255, 254);
   --surface: #ffffff;
   --text-on-primary: #ffffff;
-  --text-on-secondary: #4E5865;
+  --text-on-secondary: #436e78;
   --primary-text: #060b14;
   --secondary-text: #ffffff;
   --terciary-text: #5e6c84;
   --link-text: #0079bf;
-
 }
