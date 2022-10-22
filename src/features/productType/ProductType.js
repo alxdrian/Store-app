@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteProductType, getById } from "./productTypeSlice";
 import { TextButton } from '../../common/sharedComponents/page/Button';
+import Image from '../../common/sharedComponents/page/Image';
 
 export default function ProductType () {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ export default function ProductType () {
 
   return (
     <div className='product-type-container'>
-      <img className='product-type-image' src={productType.imageUrl} alt={productType.name} />
+      <Image className={'product-type-image'} src={productType.imageUrl} alt={productType.name} />
       <div className='product-type-content'>
         <h1 className='heading--xxl'>{productType.name}</h1>
         <div className='card'>

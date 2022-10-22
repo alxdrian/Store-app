@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addProductType, editProductType, getById, setFormField, setResetForm } from "./productTypeSlice"
 import FormControl from "../../common/sharedComponents/form/FormControl";
 import { TextButton } from '../../common/sharedComponents/page/Button';
+import Image from '../../common/sharedComponents/page/Image';
 
 export default function ProductTypeEditForm ({mode}) {
   const dispatch = useDispatch()
@@ -12,7 +13,6 @@ export default function ProductTypeEditForm ({mode}) {
   const location = useLocation()
   const navigate = useNavigate()
   const id = location.pathname.split('/')[3]
-  const previewImg = useRef()
   const form = useRef()
   const [validForm, setValidForm] = useState(false)
 
@@ -76,12 +76,10 @@ export default function ProductTypeEditForm ({mode}) {
         <TextButton type={'submit'} text={'GUARDAR'} disabled={!validForm}></TextButton>
       </div>
       
-      <img 
+      <Image
         src={fields.imageUrl} 
-        alt='vista previa de url de imagen'
-        ref={previewImg}
-        onError={(e) => previewImg.current.src = 'https://www.quicideportes.com/assets/images/custom/no-image.png' }
-        className='product-type-image'
+        alt={'vista previa de url de imagen'}
+        className={'product-type-image'}
       />
     
     </form>
