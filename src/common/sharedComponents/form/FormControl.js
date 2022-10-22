@@ -12,6 +12,7 @@ export default function FormControl (props) {
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
+          required={props.required || false}
         />
       }
       {props.type === 'textarea' && 
@@ -22,6 +23,7 @@ export default function FormControl (props) {
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
+          required={props.required || false}
         >
         </textarea>
       }

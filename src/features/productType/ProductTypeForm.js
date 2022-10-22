@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { getById, setFormField } from "./productTypeSlice"
 import FormControl from "../../common/sharedComponents/form/FormControl";
+import { TextButton } from '../../common/sharedComponents/page/Button';
 
 export default function ProductTypeForm () {
   const dispatch = useDispatch()
@@ -11,11 +12,18 @@ export default function ProductTypeForm () {
   const location = useLocation()  
   const id = location.pathname.split('/')[3]
   const previewImg = useRef()
+  const [validForm, setValidForm] = useState(true)
 
   useEffect(()=> {
     dispatch(getById(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  function onChangeField (e) {
+    e.preventDefault()
+    dispatch(setFormField({field: e.target.name, value: e.target.value}))
+    setValidForm(e.target.validity.valid)
+  }
 
   return (
     <form>
@@ -24,7 +32,8 @@ export default function ProductTypeForm () {
         type={'text'}
         placeholder={'Nombre'}
         value={form.name}
-        onChange={(e) => dispatch(setFormField({field: 'name', value: e.target.value}))}
+        onChange={(e) => onChangeField(e)}
+        required={true}
       >
         <p className="content-lg">Nombre</p>
       </FormControl>
@@ -33,7 +42,8 @@ export default function ProductTypeForm () {
         type={'textarea'}
         placeholder={'Descripción'}
         value={form.description}
-        onChange={(e) => dispatch(setFormField({field: 'description', value: e.target.value}))}
+        onChange={(e) => onChangeField(e)}
+        required={true}
       >
         <p className="content-lg">Descripción</p>
       </FormControl>
@@ -42,7 +52,7 @@ export default function ProductTypeForm () {
         type={'url'}
         placeholder={'https://...'}
         value={form.imageUrl}
-        onChange={(e) => dispatch(setFormField({field: 'imageUrl', value: e.target.value}))}
+        onChange={(e) => onChangeField(e)}
       >
         <p className="content-lg">Url de imagen</p>
       </FormControl>
@@ -55,6 +65,7 @@ export default function ProductTypeForm () {
           onError={(e) => previewImg.current.src = 'https://www.quicideportes.com/assets/images/custom/no-image.png' }
         />
       </div>
+      <TextButton type={'submit'} text={'GUARDAR'} disabled={!validForm}></TextButton>
     </form>
   )
 }
