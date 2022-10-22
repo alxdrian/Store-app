@@ -1,9 +1,10 @@
+import Page from "../../common/sharedComponents/page/Page";
 import ProductTypeEditForm from "../../features/productType/ProductTypeEditForm";
 
 export default function ProductTypeEdit ({mode}) {
   return (
-    <div>
+    <Page>
       <ProductTypeEditForm mode={mode}/>
-    </div>
+    </Page>
   )
 }

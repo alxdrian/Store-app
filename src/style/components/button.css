@@ -12,3 +12,9 @@ button {
   cursor: pointer;
   font-weight: 600;
 }
+
+button:disabled {
+  background: none;
+  border: 2px solid var(--text-on-secondary);
+  cursor: not-allowed;
+}

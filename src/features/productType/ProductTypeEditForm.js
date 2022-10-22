@@ -13,7 +13,7 @@ export default function ProductTypeEditForm ({mode}) {
   const navigate = useNavigate()
   const id = location.pathname.split('/')[3]
   const previewImg = useRef()
-  const [validForm, setValidForm] = useState(true)
+  const [validForm, setValidForm] = useState(false)
 
   useEffect(()=> {
     if (mode === 'edit') dispatch(getById(id))
@@ -39,46 +39,50 @@ export default function ProductTypeEditForm ({mode}) {
   }
 
   return (
-    <form onSubmit={(e) => onSubmitForm(e)}>
-      <FormControl
-        name={'name'}
-        type={'text'}
-        placeholder={'Nombre'}
-        value={form.name}
-        onChange={(e) => onChangeField(e)}
-        required={true}
-      >
-        <p className="content-lg">Nombre</p>
-      </FormControl>
-      <FormControl
-        name={'description'}
-        type={'textarea'}
-        placeholder={'Descripción'}
-        value={form.description}
-        onChange={(e) => onChangeField(e)}
-        required={true}
-      >
-        <p className="content-lg">Descripción</p>
-      </FormControl>
-      <FormControl
-        name={'imageUrl'}
-        type={'url'}
-        placeholder={'https://...'}
-        value={form.imageUrl}
-        onChange={(e) => onChangeField(e)}
-      >
-        <p className="content-lg">Url de imagen</p>
-      </FormControl>
-      <div>
-        <p>Vista previa</p>
-        <img 
-          src={form.imageUrl} 
-          alt='vista previa de url de imagen'
-          ref={previewImg}
-          onError={(e) => previewImg.current.src = 'https://www.quicideportes.com/assets/images/custom/no-image.png' }
-        />
+    <form onSubmit={(e) => onSubmitForm(e)} className='product-type-container'>
+      <div className='card product-type-edit-form'>
+        {mode === 'create' && <h2 className='heading--xl'>Crear nuevo producto</h2>}
+        {mode === 'edit' && <h2 className='heading--xl'>Editar producto</h2>}
+        <FormControl
+          name={'name'}
+          type={'text'}
+          placeholder={'Nombre'}
+          value={form.name}
+          onChange={(e) => onChangeField(e)}
+          required={true}
+        >
+          <p className="content-lg">Nombre</p>
+        </FormControl>
+        <FormControl
+          name={'description'}
+          type={'textarea'}
+          placeholder={'Descripción'}
+          value={form.description}
+          onChange={(e) => onChangeField(e)}
+          required={true}
+        >
+          <p className="content-lg">Descripción</p>
+        </FormControl>
+        <FormControl
+          name={'imageUrl'}
+          type={'url'}
+          placeholder={'https://...'}
+          value={form.imageUrl}
+          onChange={(e) => onChangeField(e)}
+        >
+          <p className="content-lg">Url de imagen</p>
+        </FormControl>
+        <TextButton type={'submit'} text={'GUARDAR'} disabled={!validForm}></TextButton>
       </div>
-      <TextButton type={'submit'} text={'GUARDAR'} disabled={!validForm}></TextButton>
+      
+      <img 
+        src={form.imageUrl} 
+        alt='vista previa de url de imagen'
+        ref={previewImg}
+        onError={(e) => previewImg.current.src = 'https://www.quicideportes.com/assets/images/custom/no-image.png' }
+        className='product-type-image'
+      />
+    
     </form>
   )
 }
