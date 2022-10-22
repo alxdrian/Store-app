@@ -4,6 +4,7 @@ export function TextButton (props) {
       className="button-text"
       type={props.type}
       disabled={props.disabled || false}
+      onClick={props.onClick}
     >
       {props.children}
       <p>{props.text}</p>
@@ -17,6 +18,7 @@ export function IconButton (props) {
       className="button-icon"
       type={props.type}
       disabled={props.disabled || false}
+      onClick={props.onClick}
     >
       {props.children}
     </button>
