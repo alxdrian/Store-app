@@ -5,7 +5,7 @@ import { addProductType, editProductType, getById, setFormField, setResetForm } 
 import FormControl from "../../common/sharedComponents/form/FormControl";
 import { TextButton } from '../../common/sharedComponents/page/Button';
 
-export default function ProductTypeForm ({mode}) {
+export default function ProductTypeEditForm ({mode}) {
   const dispatch = useDispatch()
   const store = useSelector(state => state.productType)
   const form = store.form.fields

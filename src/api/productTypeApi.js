@@ -1,7 +1,7 @@
 import { getRequest, postRequest, putRequest, deleteRequest } from './apiHandler'
 
-export function getAllProductTypes () {
-  return getRequest('products/types')
+export function getAllProductTypes (filters) {
+  return getRequest(`products/types?${filters}`)
 }
 
 export function getProductTypeById (id) {
