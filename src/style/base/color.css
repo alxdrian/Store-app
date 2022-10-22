@@ -1,8 +1,14 @@
 :root {
-  --primary: #0099CC;
-  --secondary: #0099CC;
-  --background: gray;
+  --primary: #53a9bb;
+  --secondary: #9bc7cd;
+  --terciary: #b4c35f;
+  --background: rgba(216, 237, 235, 0.908);
   --surface: #ffffff;
-  --primary-text: #ffffff;
-  --secondary-text: #4E5865;
+  --text-on-primary: #ffffff;
+  --text-on-secondary: #4E5865;
+  --primary-text: #060b14;
+  --secondary-text: #ffffff;
+  --terciary-text: #5e6c84;
+  --link-text: #0079bf;
+
 }
